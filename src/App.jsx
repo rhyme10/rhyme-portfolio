@@ -93,12 +93,12 @@ export default function App() {
               Hi, I’m{" "}
               <span className="text-indigo-500">Rhyme</span>
               <br />
-              Web Developer
+              Full Stack Developer
             </h2>
 
             <p className="mt-8 text-xl text-gray-300 max-w-2xl">
               Motivated web developer with hands-on experience
-              building dynamic and user-friendly applications.
+              building dynamic and user-friendly software solutions.
               Skilled in React.js, JavaScript, PHP, and SQL.
               Currently expanding knowledge in Node.js,
               Express.js, and REST APIs.
