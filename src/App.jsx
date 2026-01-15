@@ -4,11 +4,13 @@ import { Github, Mail } from "lucide-react";
 
 const GITHUB_USERNAME = "rhyme10";
 
-
 const projects = [
   {
     title: "Ticket Management System",
-    desc: "Full-stack ticketing app built with React, PHP, and SQL. Features ticket submission, tracking, and agent assignment.",
+    shortDesc:
+      "Full-stack ticketing system for issue tracking and agent assignment.",
+    fullDesc:
+      "Designed and developed a full-stack Ticket Management System using React, PHP, and SQL. The system allows users to raise support tickets, track ticket status, and enables agents to manage and resolve issues efficiently. Implemented REST-based communication, role-based views, and a responsive UI to improve usability and workflow efficiency.",
     tech: ["React", "JavaScript", "PHP", "SQL"],
     screenshots: [
       "/screenshots/tms-login.png",
@@ -18,7 +20,8 @@ const projects = [
   },
   {
     title: "Airest Website Improvements",
-    desc: "UI/UX fixes, performance optimization, and responsive redesign for an existing website.",
+    desc:
+      "UI/UX fixes, performance optimization, and responsive redesign for an existing website.",
     tech: ["HTML", "CSS", "JavaScript"],
   },
 ];
@@ -56,6 +59,54 @@ function ScreenshotCarousel({ images }) {
   );
 }
 
+function ProjectCard({ project }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="bg-gray-900 rounded-3xl p-10">
+      <h4 className="text-3xl font-semibold">
+        {project.title}
+      </h4>
+
+      {/* Short summary */}
+      <p className="mt-4 text-xl text-gray-300">
+        {project.shortDesc || project.desc}
+      </p>
+
+      {/* Full case study */}
+      {open && project.fullDesc && (
+        <p className="mt-4 text-gray-400 leading-relaxed">
+          {project.fullDesc}
+        </p>
+      )}
+
+      {project.fullDesc && (
+        <button
+          onClick={() => setOpen(!open)}
+          className="mt-4 text-indigo-400 font-medium hover:underline"
+        >
+          {open ? "Hide Case Study" : "Read Full Case Study"}
+        </button>
+      )}
+
+      {project.screenshots && (
+        <ScreenshotCarousel images={project.screenshots} />
+      )}
+
+      <div className="mt-6 flex flex-wrap gap-3">
+        {project.tech.map((t) => (
+          <span
+            key={t}
+            className="px-4 py-2 text-sm bg-gray-800 text-indigo-400 rounded-full"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
@@ -81,7 +132,7 @@ export default function App() {
         </nav>
       </header>
 
-      <main className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-12 py-20">
+      <main className="w-full px-4 sm:px-6 lg:px-16 xl:px-24 2xl:px-32 py-20">
         {/* Hero */}
         <section className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -127,7 +178,6 @@ export default function App() {
             </div>
           </motion.div>
 
-          {/* Highlights */}
           <motion.div className="bg-gray-900 rounded-3xl p-10">
             <h3 className="text-3xl font-bold mb-6">
               Key Highlights
@@ -193,38 +243,13 @@ export default function App() {
 
           <div className="grid md:grid-cols-2 gap-12">
             {projects.map((p) => (
-              <div
-                key={p.title}
-                className="bg-gray-900 rounded-3xl p-10"
-              >
-                <h4 className="text-3xl font-semibold">
-                  {p.title}
-                </h4>
-                <p className="mt-4 text-xl text-gray-300">
-                  {p.desc}
-                </p>
-
-                {p.screenshots && (
-                  <ScreenshotCarousel images={p.screenshots} />
-                )}
-
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {p.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-4 py-2 text-sm bg-gray-800 text-indigo-400 rounded-full"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              <ProjectCard key={p.title} project={p} />
             ))}
           </div>
         </section>
 
         {/* Contact */}
-         <section id="contact" className="mt-24">
+        <section id="contact" className="mt-24">
           <h3 className="text-4xl font-bold mb-8">
             Contact
           </h3>
@@ -257,7 +282,6 @@ export default function App() {
             </a>
           </div>
         </section>
-
       </main>
 
       <footer className="text-center py-10 text-lg text-gray-400">
